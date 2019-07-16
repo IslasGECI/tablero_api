@@ -21,14 +21,14 @@ def get_dashboard():
         es_develop = is_develop(tabla.revision)
         if not np.any(es_develop):
             es_exitoso_develop = medalla_na
-        elif tabla.exitoso.values[es_develop][0] == 1:
+        elif tabla.exitoso.values[es_develop][-1] == 1:
             es_exitoso_develop = medalla_exito
         else:
             es_exitoso_develop = medalla_fracaso
         es_default = tabla.revision == "default"
         if not np.any(es_default):
             es_exitoso_default = medalla_na
-        elif tabla.exitoso.values[es_default][0] == 1:
+        elif tabla.exitoso.values[es_default][-1] == 1:
             es_exitoso_default = medalla_exito
         else:
             es_exitoso_default = medalla_fracaso
