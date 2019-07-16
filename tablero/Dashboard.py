@@ -3,16 +3,22 @@
 import numpy as np
 import pandas as pd
 
+from .io.load_record import get_records
+
+def is_develop(rama):
+    es_develop = ((rama == "develop") | (rama == "development"))
+    return es_develop
+
 def get_dashboard():
     registro_ramas = get_records()
     medalla_exito = "https://img.shields.io/badge/make-passing-green.svg"
     medalla_fracaso = "https://img.shields.io/badge/make-failing-red.svg"
     medalla_na = "https://img.shields.io/badge/make-NA-lightgrey.svg"
-    es_rama = ((registro_ramas.revision == "develop") | (registro_ramas.revision == "development")) | (registro_ramas.revision == "default")
+    es_rama = is_develop(registro_ramas.revision) | (registro_ramas.revision == "default")
     tablero_ramas = registro_ramas[es_rama]
     tablero = pd.DataFrame(columns=['repo', 'objetivo', 'develop', 'default'])
     for (repo, objetivo), tabla in tablero_ramas.groupby(by=["repo","objetivo"]):
-        es_develop = ((tabla.revision == "develop") | (tabla.revision == "development"))
+        es_develop = is_develop(tabla.revision)
         if not np.any(es_develop):
             es_exitoso_develop = medalla_na
         elif tabla.exitoso.values[es_develop][0] == 1:
