@@ -5,9 +5,7 @@ import pandas as pd
 
 
 def get_records(log_name="~/.testmake/testmake.log.csv"):
-    registro_testmake = pd.read_csv(log_name)
-    registro_testmake.timestamp = pd.to_datetime(registro_testmake.timestamp)
-    registro_testmake = registro_testmake.sort_values(by="timestamp")
+    registro_testmake = pd.read_csv(log_name).sort_values(by="timestamp")
     registro_testmake["exito"] = registro_testmake.es_make_exitoso & (
         registro_testmake.es_phony | registro_testmake.existe_objetivo)
     registro_ramas = pd.DataFrame(
