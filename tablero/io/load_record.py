@@ -3,6 +3,10 @@
 import numpy as np
 import pandas as pd
 
+def get_last_record(tabla):
+    # `tabla` contiene los registros de todos los intentos de generar el
+    # objetivo, de los cuales sólo nos interesa el más reciente
+    return tabla.sort_values(by="timestamp").iloc[-1]
 
 def get_records(log_name="~/.testmake/testmake.log.csv"):
     registro_testmake = pd.read_csv(log_name).sort_values(by="timestamp")
@@ -11,12 +15,9 @@ def get_records(log_name="~/.testmake/testmake.log.csv"):
     registro_ramas = pd.DataFrame(
         columns=['repo', 'objetivo', 'revision', 'exitoso'])
     for (repo, objetivo, revision), tabla in registro_testmake.groupby(["repo", "objetivo", "revision"]):
-        # `tabla` contiene los registros de todos los intentos de generar el
-        # objetivo, de los cuales sólo nos interesa el más reciente que guardo
-        # en `ultimo_renglon`.
-        ultimo_renglon = tabla.iloc[-1]
+        ultimo_registro = get_last_record(tabla)
         renglon_concatenar = {"repo": repo, "objetivo": objetivo,
-                              "revision": revision, "exitoso": ultimo_renglon.exito}
+                              "revision": revision, "exitoso": ultimo_registro.exito}
         registro_ramas = registro_ramas.append(
             renglon_concatenar, ignore_index=True)
     return registro_ramas
