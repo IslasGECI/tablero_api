@@ -1,1 +1,2 @@
-repo,objetivo,revision,id,phony,analista,maquina,timestamp,es_make_exitoso,es_phony,existe_objetivo
+analista,es_make_exitoso,es_phony,existe_objetivo,id,maquina,objetivo,phony,repo,revision,timestamp
+
