@@ -22,7 +22,6 @@ def add_new_record():
     existe_objetivo = request.args['existe_objetivo']
     with open(datafile, 'a') as archivo:
         archivo.write(f"{repo},{objetivo},{revision},{id},{phony},{analista},{maquina},{timestamp},{es_make_exitoso},{es_phony},{existe_objetivo}\n")
-    archivo.close()
     return jsonify(request.args)
 
 if __name__ == "__main__":
