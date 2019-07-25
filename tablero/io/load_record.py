@@ -8,7 +8,7 @@ def get_last_record(tabla):
     # objetivo, de los cuales sólo nos interesa el más reciente
     return tabla.sort_values(by="timestamp").iloc[-1]
 
-def get_records(log_name="~/.testmake/testmake.log.csv"):
+def get_records(log_name="data/testmake.log.csv"):
     registro_testmake = pd.read_csv(log_name).sort_values(by="timestamp")
     registro_testmake["exito"] = registro_testmake.es_make_exitoso & (
         registro_testmake.es_phony | registro_testmake.existe_objetivo)
