@@ -9,11 +9,9 @@ def index():
 @app.route('/api/v1/record', methods=['POST'])
 def add_new_record():
     datafile = 'data/testmake.log.csv'
-    coma = ','
-    fin_linea = '\n'
     with open(datafile, 'a') as archivo:
         for indice, llave in enumerate(sorted(request.args.keys())):
-            archivo.write(f"{request.args[llave]}{coma if indice+1 < len(request.args) else fin_linea}")
+            archivo.write("{}{}".format(request.args[llave], "," if indice+1 < len(request.args) else "\n"))
     return jsonify(request.args)
 
 if __name__ == "__main__":
