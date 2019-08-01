@@ -16,4 +16,4 @@ def add_new_record():
 
 if __name__ == "__main__":
     tablero=get_dashboard()
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
