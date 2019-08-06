@@ -42,4 +42,4 @@ def get_dashboard():
         renglon_concatenar = {"repo": repo, "objetivo": objetivo,
                               "develop": es_exitoso_develop, "default": es_exitoso_default}
         tablero = tablero.append(renglon_concatenar, ignore_index=True)
-    return tablero.values.tolist()
+    return tablero
