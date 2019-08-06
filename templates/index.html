@@ -18,10 +18,10 @@
 
             {% for registro in tablero %}
             <tr>
-                <td><b>{{registro[0]}}</b></td>
-                <td><code>{{registro[1]}}</code></td>
-                <td><img src="{{registro[2]}}" /></td>
-                <td><img src="{{registro[3]}}" /></td>
+                <td><b>{{registro['repo']}}</b></td>
+                <td><code>{{registro['objetivo']}}</code></td>
+                <td><img src="{{registro['develop']}}" /></td>
+                <td><img src="{{registro['default']}}" /></td>
             </tr>
             {% endfor %}
         </table>
