@@ -17,8 +17,8 @@ def is_develop(tabla):
 
 
 def is_successful(tabla, es_rama):
-    medalla_exito = "https://img.shields.io/badge/make-passing-green.svg"
-    medalla_fracaso = "https://img.shields.io/badge/make-failing-red.svg"
+    medalla_exito = "https://img.shields.io/badge/make-PASS-green.svg"
+    medalla_fracaso = "https://img.shields.io/badge/make-FAIL-red.svg"
     medalla_na = "https://img.shields.io/badge/make-NA-lightgrey.svg"
     if not np.any(es_rama):
         es_exitoso = medalla_na
