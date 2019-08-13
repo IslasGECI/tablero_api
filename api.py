@@ -1,10 +1,12 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, Response, jsonify, render_template, request
 import tablero
 app = Flask(__name__)
 
 @app.route('/api/v1/dashboard')
 def get_dashboard():
-    return tablero.get_dashboard().to_json(orient='records')
+    resp = Response(tablero.get_dashboard().to_json(orient='records'))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 @app.route('/api/v1/records', methods=['POST'])
 def add_new_record():
