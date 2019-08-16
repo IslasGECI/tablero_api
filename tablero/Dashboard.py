@@ -16,17 +16,17 @@ def is_develop(tabla):
     return es_develop
 
 
-def is_successful(tabla, es_rama):
+def get_badge(tabla, es_rama):
     medalla_exito = "https://img.shields.io/badge/make-PASS-green.svg"
     medalla_fracaso = "https://img.shields.io/badge/make-FAIL-red.svg"
     medalla_na = "https://img.shields.io/badge/make-NA-lightgrey.svg"
     if not np.any(es_rama):
-        es_exitoso = medalla_na
+        medalla = medalla_na
     elif tabla.exitoso.values[es_rama][-1] == 1:
-        es_exitoso = medalla_exito
+        medalla = medalla_exito
     else:
-        es_exitoso = medalla_fracaso
-    return es_exitoso
+        medalla = medalla_fracaso
+    return medalla
 
 
 def get_dashboard():
@@ -37,9 +37,9 @@ def get_dashboard():
     for (repo, objetivo), tabla in tablero_ramas.groupby(by=["repo", "objetivo"]):
         es_default = is_default(tabla)
         es_develop = is_develop(tabla)
-        es_exitoso_default = is_successful(tabla, es_default)
-        es_exitoso_develop = is_successful(tabla, es_develop)
+        medalla_default = get_badge(tabla, es_default)
+        medalla_develop = get_badge(tabla, es_develop)
         renglon_concatenar = {"repo": repo, "objetivo": objetivo,
-                              "develop": es_exitoso_develop, "default": es_exitoso_default}
+                              "develop": medalla_develop, "default": medalla_default}
         tablero = tablero.append(renglon_concatenar, ignore_index=True)
     return tablero
