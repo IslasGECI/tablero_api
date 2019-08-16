@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from .io import get_records
+from .io import get_last_record_per_revision
 
 
 def is_default(tabla):
@@ -30,7 +30,7 @@ def get_badge(tabla, es_rama):
 
 
 def get_dashboard():
-    registro_ramas = get_records()
+    registro_ramas = get_last_record_per_revision()
     es_rama = is_develop(registro_ramas) | is_default(registro_ramas)
     tablero_ramas = registro_ramas[es_rama]
     tablero = pd.DataFrame(columns=['repo', 'objetivo', 'develop', 'default'])
