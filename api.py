@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify, render_template, request
+from flask import Flask, Response, jsonify, request
 import tablero
 app = Flask(__name__)
 
