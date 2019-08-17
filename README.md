@@ -2,7 +2,7 @@
 
 API para el tablero de reproducibilidad de nuestros reportes mediante `testMake`.
 
-## Entrypoints
+## Entry Points
 
 ### GET
 
