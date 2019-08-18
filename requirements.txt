@@ -2,4 +2,6 @@ flask
 numpy
 pandas
 # Modulos para desarrollo:
+codecov
 pytest
+pytest-cov
