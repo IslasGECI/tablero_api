@@ -7,4 +7,4 @@ run:
 	docker run --detach --publish 500:5000 --rm islasgeci/tablero_api
 
 tests:
-	pytest --verbose
+	pytest --cov=tablero --cov-report=term --verbose

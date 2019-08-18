@@ -2,6 +2,9 @@ flask
 numpy
 pandas
 # Modulos para desarrollo:
+autopep8
 codecov
+pylint
 pytest
 pytest-cov
+rope
