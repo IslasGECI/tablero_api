@@ -1,5 +1,7 @@
 from collections import namedtuple
 
+import pandas as pd
+
 from .Dashboard import *
 
 registro = namedtuple('registro', ['repo', 'objetivo', 'revision', 'exitoso'])
@@ -26,3 +28,17 @@ def test_is_develop():
     assert not dev_es_develop
     assert develop_es_develop
     assert development_es_develop
+
+
+def test_get_badge():
+    medalla_exito = "https://img.shields.io/badge/make-PASS-green.svg"
+    medalla_fracaso = "https://img.shields.io/badge/make-FAIL-red.svg"
+    medalla_na = "https://img.shields.io/badge/make-NA-lightgrey.svg"
+    assert get_badge(registro('repositorio', 'reporte',
+                              'rama', pd.Series([0])), False) == medalla_na
+    assert get_badge(registro('repositorio', 'reporte',
+                              'rama', pd.Series([1])), False) == medalla_na
+    assert get_badge(registro('repositorio', 'reporte',
+                              'rama', pd.Series([0])), True) == medalla_fracaso
+    assert get_badge(registro('repositorio', 'reporte',
+                              'rama', pd.Series([1])), True) == medalla_exito

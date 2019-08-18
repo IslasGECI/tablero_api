@@ -6,11 +6,11 @@ import pandas as pd
 from .io import get_last_record_per_revision
 
 
-def append_row_to_dashboard(registro, repo, objetivo, tablero):
-    es_default = is_default(registro)
-    es_develop = is_develop(registro)
-    medalla_default = get_badge(registro, es_default)
-    medalla_develop = get_badge(registro, es_develop)
+def append_row_to_dashboard(registros_agrupados, repo, objetivo, tablero):
+    es_default = is_default(registros_agrupados)
+    es_develop = is_develop(registros_agrupados)
+    medalla_default = get_badge(registros_agrupados, es_default)
+    medalla_develop = get_badge(registros_agrupados, es_develop)
     renglon_concatenar = {"repo": repo, "objetivo": objetivo,
                           "develop": medalla_develop, "default": medalla_default}
     tablero = tablero.append(renglon_concatenar, ignore_index=True)
@@ -47,6 +47,6 @@ def get_dashboard():
     es_rama = is_develop(registro_ramas) | is_default(registro_ramas)
     tablero_ramas = registro_ramas[es_rama]
     tablero = pd.DataFrame(columns=['repo', 'objetivo', 'develop', 'default'])
-    for (repo, objetivo), registro in tablero_ramas.groupby(by=["repo", "objetivo"]):
-        tablero = append_row_to_dashboard(registro, repo, objetivo, tablero)
+    for (repo, objetivo), registros_agrupados in tablero_ramas.groupby(by=["repo", "objetivo"]):
+        tablero = append_row_to_dashboard(registros_agrupados, repo, objetivo, tablero)
     return tablero
