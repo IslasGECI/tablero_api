@@ -1,4 +1,4 @@
-.PHONY: build run
+.PHONY: build run tests
 
 build:
 	docker build --tag=islasgeci/tablero_api .
@@ -6,3 +6,5 @@ build:
 run:
 	docker run --detach --publish 500:5000 --rm islasgeci/tablero_api
 
+tests:
+	pytest --verbose
