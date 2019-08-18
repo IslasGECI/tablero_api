@@ -42,3 +42,12 @@ def test_get_badge():
                               'rama', pd.Series([0])), True) == medalla_fracaso
     assert get_badge(registro('repositorio', 'reporte',
                               'rama', pd.Series([1])), True) == medalla_exito
+
+def test_get_dashboard():
+    tablero = get_dashboard(log_name="data/testmake.test.csv")
+    columnas_obtenidas = sorted(tablero)
+    columnas_eperadas = ['default', 'develop', 'objetivo', 'repo']
+    assert columnas_obtenidas == columnas_eperadas
+    tamano_obtenido = tablero.shape
+    tamano_esperado = (17,4)
+    assert tamano_obtenido == tamano_esperado

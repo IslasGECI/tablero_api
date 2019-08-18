@@ -42,8 +42,8 @@ def get_badge(registro, es_rama):
     return medalla
 
 
-def get_dashboard():
-    registro_ramas = get_last_record_per_revision()
+def get_dashboard(log_name="data/testmake.log.csv"):
+    registro_ramas = get_last_record_per_revision(log_name)
     es_rama = is_develop(registro_ramas) | is_default(registro_ramas)
     tablero_ramas = registro_ramas[es_rama]
     tablero = pd.DataFrame(columns=['repo', 'objetivo', 'develop', 'default'])
