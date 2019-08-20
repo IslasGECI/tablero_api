@@ -5,6 +5,6 @@ pandas
 autopep8
 codecov
 pylint
-pytest
+pytest==5.0.1
 pytest-cov
 rope
