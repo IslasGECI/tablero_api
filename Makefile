@@ -1,3 +1,5 @@
+all: tests
+
 .PHONY: build run tests
 
 build:
