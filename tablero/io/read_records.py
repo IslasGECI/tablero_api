@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 # coding: utf-8
-import numpy as np
 import pandas as pd
 
 
 def get_last_record_per_revision(log_name="data/testmake.log.csv"):
     registro_testmake = import_data(log_name)
     registro_ramas = pd.DataFrame(
-        columns=['repo', 'objetivo', 'revision', 'exitoso'])
-    for (repo, objetivo, revision), tabla in registro_testmake.groupby(["repo", "objetivo", "revision"]):
+        columns=["repo", "objetivo", "revision", "exitoso"])
+    for (repo, objetivo, revision), tabla in registro_testmake.groupby(
+            ["repo", "objetivo", "revision"]):
         registro_ramas = add_last_record_of_revision(
             tabla, repo, objetivo, revision, registro_ramas)
     return registro_ramas

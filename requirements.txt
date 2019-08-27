@@ -1,5 +1,4 @@
 flask
-numpy
 pandas
 # Modulos para desarrollo:
 autopep8
