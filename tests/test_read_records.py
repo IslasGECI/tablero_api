@@ -1,4 +1,5 @@
-from .read_records import get_last_record_per_revision
+from tablero.io import get_last_record_per_revision
+
 
 def test_count_of_last_record_per_revision():
     registro_ramas = get_last_record_per_revision(
