@@ -2,7 +2,7 @@ from collections import namedtuple
 
 import pandas as pd
 
-from tablero.Dashboard import *
+from tablero.dashboard import *
 
 registro = namedtuple('registro', ['repo', 'objetivo', 'revision', 'exitoso'])
 

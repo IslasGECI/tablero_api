@@ -1,1 +1,1 @@
-from .Dashboard import get_dashboard
+from .dashboard import get_dashboard
