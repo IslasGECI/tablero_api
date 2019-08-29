@@ -1,12 +1,14 @@
-from flask import Flask, jsonify, render_template, request
-from tablero.Dashboard import get_dashboard
+from flask import Flask, Response, jsonify, request
+import tablero
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template("index.html", tablero=get_dashboard())
+@app.route('/api/v1/dashboard')
+def get_dashboard():
+    resp = Response(tablero.get_dashboard().to_json(orient='records'))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
-@app.route('/api/v1/record', methods=['POST'])
+@app.route('/api/v1/records', methods=['POST'])
 def add_new_record():
     datafile = 'data/testmake.log.csv'
     with open(datafile, 'a') as archivo:
@@ -15,5 +17,4 @@ def add_new_record():
     return jsonify(request.args)
 
 if __name__ == "__main__":
-    tablero=get_dashboard()
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

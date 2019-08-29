@@ -1,1 +1,1 @@
-from .load_record import get_records
+from .read_records import get_last_record_per_revision

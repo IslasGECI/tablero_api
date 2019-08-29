@@ -1,8 +1,15 @@
-.PHONY: build run
+all: install tests
+
+.PHONY: build install run tests
 
 build:
-	docker build --tag=tablero .
+	docker build --tag=islasgeci/tablero_api .
+
+install:
+	pip install --editable .
 
 run:
-	docker run --detach --publish 5000:5000 --rm --volume $${HOME}/repositorios/tablero/:/workdir tablero
+	docker run --detach --publish 500:5000 --rm islasgeci/tablero_api
 
+tests:
+	pytest --cov=tablero --cov-report=term --verbose
