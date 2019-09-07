@@ -53,26 +53,34 @@ def test_get_dashboard():
     tamano_esperado = (17, 4)
     assert tamano_obtenido == tamano_esperado
 
+
 def test_develop0_developFail():
-    registro = pd.DataFrame({'repo':'repositorio', 'objetivo':'reporte', 'revision':'develop', 'exitoso':[0]},columns=['repo', 'objetivo', 'revision', 'exitoso'])
+    registro = pd.DataFrame({'repo': 'repositorio', 'objetivo': 'reporte', 'revision': 'develop', 'exitoso': [0]},
+                            columns=['repo', 'objetivo', 'revision', 'exitoso'])
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert 'FAIL' in renglon['develop']
     assert 'NA' in renglon['default']
 
+
 def test_develop1_developPass():
-    registro = pd.DataFrame({'repo':'repositorio', 'objetivo':'reporte', 'revision':'develop', 'exitoso':[1]},columns=['repo', 'objetivo', 'revision', 'exitoso'])
+    registro = pd.DataFrame({'repo': 'repositorio', 'objetivo': 'reporte', 'revision': 'develop', 'exitoso': [1]},
+                            columns=['repo', 'objetivo', 'revision', 'exitoso'])
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert 'PASS' in renglon['develop']
     assert 'NA' in renglon['default']
 
+
 def test_master0_masterFail():
-    registro = pd.DataFrame({'repo':'repositorio', 'objetivo':'reporte', 'revision':'master', 'exitoso':[0]},columns=['repo', 'objetivo', 'revision', 'exitoso'])
+    registro = pd.DataFrame({'repo': 'repositorio', 'objetivo': 'reporte', 'revision': 'master', 'exitoso': [0]},
+                            columns=['repo', 'objetivo', 'revision', 'exitoso'])
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert 'NA' in renglon['develop']
     assert 'FAIL' in renglon['default']
 
+
 def test_master1_masterPass():
-    registro = pd.DataFrame({'repo':'repositorio', 'objetivo':'reporte', 'revision':'master', 'exitoso':[1]},columns=['repo', 'objetivo', 'revision', 'exitoso'])
+    registro = pd.DataFrame({'repo': 'repositorio', 'objetivo': 'reporte', 'revision': 'master', 'exitoso': [1]},
+                            columns=['repo', 'objetivo', 'revision', 'exitoso'])
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert 'NA' in renglon['develop']
     assert 'PASS' in renglon['default']
