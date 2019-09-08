@@ -7,6 +7,12 @@ from tablero.dashboard import *
 registro = namedtuple('registro', ['repo', 'objetivo', 'revision', 'exitoso'])
 
 
+def assert_dashboard_columns(tablero):
+    columnas_esperadas = sorted(['repo', 'objetivo', 'develop', 'default'])
+    columnas_obtenidas = sorted(tablero)
+    assert columnas_obtenidas == columnas_esperadas
+
+
 def test_is_default():
     default_es_default = is_default(
         registro('repositorio', 'reporte', 'default', 0))
@@ -44,14 +50,28 @@ def test_get_badge():
                               'rama', pd.Series([1])), True) == medalla_exito
 
 
-def test_get_dashboard():
+def test_dashboard_columns_from_test_datafile():
     tablero = get_dashboard(log_name="data/testmake.test.csv")
-    columnas_obtenidas = sorted(tablero)
-    columnas_eperadas = ['default', 'develop', 'objetivo', 'repo']
-    assert columnas_obtenidas == columnas_eperadas
-    tamano_obtenido = tablero.shape
+    assert_dashboard_columns(tablero)
+
+
+def test_dashboard_columns_from_empty_datafile():
+    tablero = get_dashboard()
+    assert_dashboard_columns(tablero)
+
+
+def test_dashboard_size_from_test_datafile():
+    tablero = get_dashboard(log_name="data/testmake.test.csv")
     tamano_esperado = (17, 4)
+    tamano_obtenido = tablero.shape
     assert tamano_obtenido == tamano_esperado
+
+
+def test_dashboard_size_from_empty_datafile():
+    tablero = get_dashboard()
+    n_cols_esperado = 4
+    n_cols_obtenido = tablero.shape[1]
+    assert n_cols_obtenido == n_cols_esperado
 
 
 def test_develop0_developFail():
