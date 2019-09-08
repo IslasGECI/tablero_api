@@ -3,7 +3,8 @@ pandas
 # Modulos para desarrollo:
 autopep8
 codecov
+mutmut
 pylint
-pytest==5.0.1
 pytest-cov
+pytest==5.0.1
 rope
