@@ -3,6 +3,13 @@ from tablero.io import get_last_record_per_revision
 from tablero.io.read_records import import_data
 
 
+def assert_columns_of_records(registros):
+    columns_of_records_expected = sorted(
+        ['repo', 'objetivo', 'revision', 'exitoso'])
+    columns_of_records_obtained = sorted(registros)
+    assert columns_of_records_obtained == columns_of_records_expected
+
+
 def test_count_of_last_record_per_revision():
     registros = get_last_record_per_revision(
         log_name="data/testmake.test.csv")
@@ -11,13 +18,15 @@ def test_count_of_last_record_per_revision():
     assert count_of_records_obtained == count_of_records_expected
 
 
-def test_columns_of_last_record_per_revision():
+def test_columns_of_test_records():
     registros = get_last_record_per_revision(
         log_name="data/testmake.test.csv")
-    columns_of_records_expected = sorted(
-        ['repo', 'objetivo', 'revision', 'exitoso'])
-    columns_of_records_obtained = sorted(registros)
-    assert columns_of_records_obtained == columns_of_records_expected
+    assert_columns_of_records(registros)
+
+
+def test_columns_of_empty_records():
+    registros = get_last_record_per_revision()
+    assert_columns_of_records(registros)
 
 
 def test_imported_data():
