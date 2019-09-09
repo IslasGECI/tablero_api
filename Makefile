@@ -2,6 +2,7 @@ all: install tests
 
 .PHONY: all \
     build \
+    clean \
     install \
     lint \
     mutation \
@@ -11,6 +12,9 @@ all: install tests
 
 build:
 	docker build --tag=islasgeci/tablero_api .
+
+clean:
+	sudo rm --recursive $(find . -name "__pycache__")
 
 install:
 	pip install --editable .
