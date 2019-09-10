@@ -14,7 +14,7 @@ build:
 	docker build --tag=islasgeci/tablero_api .
 
 clean:
-	sudo rm --recursive $(find . -name "__pycache__")
+	sudo rm --recursive $$(find . -name "__pycache__")
 
 install:
 	pip install --editable .
