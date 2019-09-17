@@ -1,4 +1,4 @@
-all: install tests
+all: install tests mutation
 
 .PHONY: all \
     build \
