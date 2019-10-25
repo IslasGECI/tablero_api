@@ -6,6 +6,6 @@ install:
   - pip install --requirement requirements.txt
   - pip install --editable .
 script:
-  - pytest --cov=tablero --cov-report=term --verbose
+  - make tests
 after_success:
   - codecov
