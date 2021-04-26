@@ -1,5 +1,5 @@
 FROM python:3
-COPY . /workdir/
 WORKDIR /workdir
+COPY . .
 RUN pip install --requirement requirements.txt
 CMD ["python", "-m", "api"]
