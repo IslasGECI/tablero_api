@@ -37,7 +37,7 @@ def test_is_develop():
 
 
 def test_get_badge():
-    medalla_exito = "https://img.shields.io/badge/make-PASS-green.svg"
+    medalla_exito = "https://img.shields.io/badge/make-PASS-success.svg"
     medalla_fracaso = "https://img.shields.io/badge/make-FAIL-red.svg"
     medalla_na = "https://img.shields.io/badge/make-NA-lightgrey.svg"
     assert get_badge(registro('repositorio', 'reporte',
