@@ -1,17 +1,13 @@
-all: install tests mutation
+all: tests
 
-.PHONY: all \
-    build \
+.PHONY: \ 
+	all \
     clean \
     install \
-    lint \
-    mutation \
+    linter \
+    mutants \
     run \
-    tests \
-
-
-build:
-	docker build --tag=islasgeci/tablero_api .
+    tests
 
 clean:
 	rm --recursive $$(find . -name "__pycache__")
@@ -19,14 +15,14 @@ clean:
 install:
 	pip install --editable .
 
-lint:
+linter:
 	pylint tablero
 
-mutation:
+mutants: install
 	mutmut run --paths-to-mutate tablero
 
 run:
 	docker run --detach --publish 500:5000 --rm islasgeci/tablero_api
 
-tests:
+tests: install
 	pytest --cov=tablero --cov-report=term --verbose
