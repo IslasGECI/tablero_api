@@ -4,6 +4,7 @@ COPY . .
 RUN pip install \
     black \
     codecov \
+    data-science-types \
     flake8 \
     mutmut \
     mypy \
