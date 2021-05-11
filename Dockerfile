@@ -1,5 +1,14 @@
 FROM python:3
-COPY . /workdir/
 WORKDIR /workdir
-RUN pip install --requirement requirements.txt
+COPY . .
+RUN pip install \
+    black \
+    codecov \
+    data-science-types \
+    flake8 \
+    mutmut \
+    mypy \
+    pylint \
+    pytest \
+    pytest-cov
 CMD ["python", "-m", "api"]

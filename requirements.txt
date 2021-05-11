@@ -1,9 +1,0 @@
-flask
-pandas
-# Modulos para desarrollo:
-autopep8
-codecov
-pylint
-pytest==5.0.1
-pytest-cov
-rope
