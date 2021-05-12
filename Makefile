@@ -9,6 +9,7 @@ all: check coverage mutants
 	install \
 	linter \
 	mutants \
+	start \
 	tests
 
 module = tablero
@@ -59,6 +60,9 @@ linter:
 
 mutants: install
 	mutmut run --paths-to-mutate ${module}
+
+start: install
+	python -m api
 
 tests: install
 	pytest --cov=tablero --cov-report=term --verbose

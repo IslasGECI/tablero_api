@@ -11,4 +11,4 @@ RUN pip install \
     pylint \
     pytest \
     pytest-cov
-CMD ["python", "-m", "api"]
+CMD ["make", "start"]
