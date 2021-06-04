@@ -14,11 +14,13 @@ def get_dashboard():
 @app.route("/api/v1/records", methods=["POST"])
 def add_new_record():
     datafile = "data/testmake.log.csv"
-    with open(datafile, "a") as archivo:
-        for indice, llave in enumerate(sorted(request.args.keys())):
-            archivo.write(
-                "{}{}".format(request.args[llave], "," if indice + 1 < len(request.args) else "\n")
-            )
+    is_true_analista = request.args["analista"] != "inspector"
+    if is_true_analista:
+        with open(datafile, "a") as archivo:
+            for indice, llave in enumerate(sorted(request.args.keys())):
+                archivo.write(
+                    "{}{}".format(request.args[llave], "," if indice + 1 < len(request.args) else "\n")
+                )
     return jsonify(request.args)
 
 
