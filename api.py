@@ -19,7 +19,9 @@ def add_new_record():
         with open(datafile, "a") as archivo:
             for indice, llave in enumerate(sorted(request.args.keys())):
                 archivo.write(
-                    "{}{}".format(request.args[llave], "," if indice + 1 < len(request.args) else "\n")
+                    "{}{}".format(
+                        request.args[llave], "," if indice + 1 < len(request.args) else "\n"
+                    )
                 )
     return jsonify(request.args)
 
