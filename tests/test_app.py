@@ -10,9 +10,7 @@ class Request:
 
 
 def test_add_new_record(mocker):
-    request = Request()
-    post = app.post("/api/v1/records", data=dict(analista="inspecto", repo="repo_1"))
-    print(post)
+    app.post("/api/v1/records", data=dict(analista="inspecto", repo="repo_1"))
     app.get("/api/v1/records", query_string=dict(arg1="data1", arg2="data2"))
     with app.test_request_context("/?analista=inspecto"):
         assert flask.request.args["analista"] == "inspecto"
@@ -26,10 +24,9 @@ class TestApp(TestCase):
         return app
 
     def test_add_new_record(self):
-        request = Request()
-        post = self.client.post("/api/v1/records?analista=inspector")
+        self.client.post("/api/v1/records?analista=inspector")
         assert filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
-        post = self.client.post("/api/v1/records?analista=no_inspector")
+        self.client.post("/api/v1/records?analista=no_inspector")
         assert not filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
 
     def test_get_dash(self):
