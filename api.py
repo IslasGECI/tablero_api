@@ -1,14 +1,37 @@
 from flask import Flask, Response, jsonify, request
+from functools import wraps
 import tablero
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = '99fbe9187c98194fca5eff2e82f64c09'
+
+def token_required(f):
+    @wraps(f)
+    def decorator(*args, **kwargs):
+        token = None
+
+        if 'x-access-tokens' in request.headers:
+            token = request.headers['x-access-tokens']
+
+        if not token:
+            return jsonify({'message': 'a valid token is missing'})
+        
+        if token == app.config['SECRET_KEY']:
+            return f(*args, **kwargs)
+        else:
+            return jsonify({'message': 'token is invalid'})
+            
+    return decorator
+
 @app.route('/api/v1/dashboard')
+@token_required
 def get_dashboard():
     resp = Response(tablero.get_dashboard().to_json(orient='records'))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
 @app.route('/api/v1/records', methods=['POST'])
+@token_required
 def add_new_record():
     datafile = 'data/testmake.log.csv'
     with open(datafile, 'a') as archivo:
