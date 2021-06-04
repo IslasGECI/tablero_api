@@ -14,8 +14,8 @@ def get_dashboard():
 @app.route("/api/v1/records", methods=["POST"])
 def add_new_record():
     datafile = "data/testmake.log.csv"
-    is_true_analista = request.args["analista"] != "inspector"
-    if is_true_analista:
+    is_valid_request = tablero.validate_request(request)
+    if is_valid_request:
         with open(datafile, "a") as archivo:
             for indice, llave in enumerate(sorted(request.args.keys())):
                 archivo.write(
