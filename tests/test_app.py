@@ -28,8 +28,9 @@ class TestApp(TestCase):
     def test_add_new_record(self):
         request = Request()
         post = self.client.post("/api/v1/records?analista=inspector")
-        self.assert200(post)
         assert filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
+        post = self.client.post("/api/v1/records?analista=no_inspector")
+        assert not filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
 
     def test_get_dash(self):
         get_something = self.client.get("/api/v1/dashboard")
