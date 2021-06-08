@@ -6,6 +6,7 @@ RUN pip install \
     codecov \
     data-science-types \
     flake8 \
+    flask_testing \
     mutmut \
     mypy \
     pylint \

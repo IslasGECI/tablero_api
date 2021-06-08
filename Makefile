@@ -17,9 +17,11 @@ codecov_token = 8190b206-7a1c-4772-91c5-969521bdc433
 
 check:
 	black --check --line-length 100 ${module}
+	black --check --line-length 100 api.py
 	black --check --line-length 100 setup.py
 	black --check --line-length 100 tests
 	flake8 --max-line-length 100 ${module}
+	flake8 --max-line-length 100 api.py
 	flake8 --max-line-length 100 setup.py
 	flake8 --max-line-length 100 tests
 	mypy ${module}
@@ -39,6 +41,7 @@ coverage: install
 
 format:
 	black --line-length 100 ${module}
+	black --line-length 100 api.py
 	black --line-length 100 setup.py
 	black --line-length 100 tests
 
@@ -60,6 +63,7 @@ linter:
 
 mutants: install
 	mutmut run --paths-to-mutate ${module}
+	mutmut run --paths-to-mutate api.py
 
 start: install
 	python -m api
