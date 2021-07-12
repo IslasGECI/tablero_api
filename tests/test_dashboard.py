@@ -2,24 +2,24 @@ from collections import namedtuple
 
 import pandas as pd
 
-from tablero.dashboard import is_default, is_develop, get_badge, get_dashboard, get_row_to_append
+from tablero.dashboard import is_main, is_develop, get_badge, get_dashboard, get_row_to_append
 
 registro = namedtuple("registro", ["repo", "objetivo", "revision", "exitoso"])
 
 
 def assert_dashboard_columns(tablero):
-    columnas_esperadas = sorted(["repo", "objetivo", "develop", "default"])
+    columnas_esperadas = sorted(["repo", "objetivo", "develop", "main"])
     columnas_obtenidas = sorted(tablero)
     assert columnas_obtenidas == columnas_esperadas
 
 
-def test_is_default():
-    default_es_default = is_default(registro("repositorio", "reporte", "default", 0))
-    master_es_default = is_default(registro("repositorio", "reporte", "master", 0))
-    stable_es_default = is_default(registro("repositorio", "reporte", "stable", 0))
-    assert default_es_default
-    assert master_es_default
-    assert not stable_es_default
+def test_is_main():
+    main_es_main = is_main(registro("repositorio", "reporte", "main", 0))
+    master_es_main = is_main(registro("repositorio", "reporte", "master", 0))
+    stable_es_main = is_main(registro("repositorio", "reporte", "stable", 0))
+    assert main_es_main
+    assert master_es_main
+    assert not stable_es_main
 
 
 def test_is_develop():
@@ -81,7 +81,7 @@ def test_develop0_developFail():
     )
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert "FAIL" in renglon["develop"]
-    assert "NA" in renglon["default"]
+    assert "NA" in renglon["main"]
 
 
 def test_develop1_developPass():
@@ -91,7 +91,7 @@ def test_develop1_developPass():
     )
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert "PASS" in renglon["develop"]
-    assert "NA" in renglon["default"]
+    assert "NA" in renglon["main"]
 
 
 def test_master0_masterFail():
@@ -101,7 +101,7 @@ def test_master0_masterFail():
     )
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert "NA" in renglon["develop"]
-    assert "FAIL" in renglon["default"]
+    assert "FAIL" in renglon["main"]
 
 
 def test_master1_masterPass():
@@ -111,4 +111,4 @@ def test_master1_masterPass():
     )
     renglon = get_row_to_append(registro, "repositorio", "objetivo")
     assert "NA" in renglon["develop"]
-    assert "PASS" in renglon["default"]
+    assert "PASS" in renglon["main"]
