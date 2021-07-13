@@ -10,11 +10,24 @@ class TestApp(TestCase):
         return app
 
     def test_add_new_record(self):
-        self.client.post("/api/v1/records?analista=inspector")
-        assert filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
-        self.client.post("/api/v1/records?analista=no_inspector")
-        assert not filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
+        invalid_analyst = "inspector"
+        invalid_token = "f9"
+        valid_token = "fb09"
+        valid_analyst = "not_inspector"
+        a_new_row_was_not_added = not self._was_added_a_new_row(invalid_analyst, invalid_token)
+        assert a_new_row_was_not_added
+        a_new_row_was_not_added = not self._was_added_a_new_row(invalid_analyst, valid_token)
+        assert a_new_row_was_not_added
+        a_new_row_was_not_added = not self._was_added_a_new_row(valid_analyst, invalid_token)
+        assert a_new_row_was_not_added
+        a_new_row_was_added = self._was_added_a_new_row(valid_analyst, valid_token)
+        assert a_new_row_was_added
 
     def test_get_dash(self):
         get_something = self.client.get("/api/v1/dashboard")
         self.assert200(get_something)
+
+    def _was_added_a_new_row(self, analista, token):
+        valid_token = "fb09"
+        self.client.post(f"/api/v1/records?analista={analista}", headers={"Autorization": token})
+        return not filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")

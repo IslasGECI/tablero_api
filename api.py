@@ -4,7 +4,7 @@ import tablero
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "99fbe9187c98194fca5eff2e82f64c09"
+app.config["SECRET_KEY"] = "fb09"
 
 
 def token_required(f):
@@ -12,8 +12,8 @@ def token_required(f):
     def decorator(*args, **kwargs):
         token = None
 
-        if "x-access-tokens" in request.headers:
-            token = request.headers["x-access-tokens"]
+        if "Autorization" in request.headers:
+            token = request.headers["Autorization"]
 
         if not token:
             return jsonify({"message": "a valid token is missing"})
