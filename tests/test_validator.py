@@ -8,6 +8,5 @@ class Request:
 
 def test_is_valid_user():
     request = Request()
-    obtained_is_valid_analista = is_valid_user(request)
-    expected_is_valid_analista = False
-    assert obtained_is_valid_analista == expected_is_valid_analista
+    is_valid_analista = is_valid_user(request)
+    assert not is_valid_analista
