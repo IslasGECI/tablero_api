@@ -68,5 +68,8 @@ mutants: install
 start: install
 	python -m api
 
-tests: install
+set_tests:
+	cp data/testmake.log.tests.csv data/testmake.log.csv
+
+tests: install set_tests
 	pytest --cov=tablero --cov-report=term --verbose
