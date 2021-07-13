@@ -28,6 +28,5 @@ class TestApp(TestCase):
         self.assert200(get_something)
 
     def _was_added_a_new_row(self, analista, token):
-        valid_token = "fb09"
         self.client.post(f"/api/v1/records?analista={analista}", headers={"Autorization": token})
         return not filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
