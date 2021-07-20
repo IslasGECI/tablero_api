@@ -13,8 +13,8 @@ def token_required(f):
     def decorator(*args, **kwargs):
         token = None
 
-        if "Autorization" in request.headers:
-            token = request.headers["Autorization"]
+        if "Authorization" in request.headers:
+            token = request.headers["Authorization"]
 
         if not token:
             return jsonify({"message": "a valid token is missing"})
