@@ -1,10 +1,11 @@
 from flask import Flask, Response, jsonify, request
 from functools import wraps
 import tablero
+import os
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "fb09"
+app.config["SECRET_KEY"] = os.getenv("TABLERO_FRONT_SECRET_KEY")
 
 
 def token_required(f):

@@ -12,7 +12,7 @@ class TestApp(TestCase):
     def test_add_new_record(self):
         invalid_analyst = "inspector"
         invalid_token = "f9"
-        valid_token = "fb09"
+        valid_token = app.config["SECRET_KEY"]
         valid_analyst = "not_inspector"
         a_new_row_was_not_added = not self._was_added_a_new_row(invalid_analyst, invalid_token)
         assert a_new_row_was_not_added
