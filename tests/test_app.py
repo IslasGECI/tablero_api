@@ -7,6 +7,7 @@ class TestApp(TestCase):
     def create_app(self):
         """Flask knows that is in testing mode"""
         app.config["TESTING"] = True
+        app.config["SECRET_KEY"] = "dummy_secret_key"
         return app
 
     def test_add_new_record(self):
