@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = os.getenv("TABLERO_FRONT_SECRET_KEY")
+app.config["SECRET_KEY"] = os.getenv("TABLERO_API_SECRET_KEY")
 
 
 def token_required(f):
