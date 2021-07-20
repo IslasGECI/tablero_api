@@ -50,5 +50,5 @@ def add_new_record():
     return jsonify(request.args)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no mutate
     app.run(host="0.0.0.0", debug=True)
