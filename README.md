@@ -19,6 +19,14 @@ variable de entorno en el __~/.vault/.secrets__ está disponible:
 ```shell
 export TABLERO_API_SECRET_KEY=<VALOR DEL TOKEN>
 ```
+Si desearamos crear un nuevo token podemos ejecutar secuencialmente los siguientes comandos:
+```python
+python3
+>> import secrets
+>> secrets.token_urlsafe(20)
+```
+obteniendo como resultado un nuevo token para ser utilizado
+Ejemplo: `T4wq9JvpEAjXfK8ACpAuEERcL3w`
 
 Esta variable es el token de seguridad para nuestra API, sera la llave y debera ser solicidata y configurada por quienes deseen utilizar nuestra API. De no tenerla configurada, deberemos solicitar el _token_ al encargado actual del
 repositorio y agregarla a nuestro archivo __~/.vault/.secrets__.
