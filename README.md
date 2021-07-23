@@ -55,8 +55,8 @@ $ docker run --detach --publish  500:5000 --rm --env="TABLERO_API_SECRET_KEY=${T
 
 ## Como probar la API en localhost
 Para probar la API, podemos ejecutar el siguiente comando en nuestra terminal:
-```
-curl -i --header "Authorization: <TABLERO_API_SECRET_KEY>" -X POST "localhost:500/api/v1/records?analista=minombre"
+```shell
+$ curl -i --header "Authorization: <TABLERO_API_SECRET_KEY>" -X POST "localhost:500/api/v1/records?analista=minombre"
 ```
 
 ---
