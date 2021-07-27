@@ -30,4 +30,4 @@ class TestApp(TestCase):
 
     def _was_added_a_new_row(self, analista, token):
         self.client.post(f"/api/v1/records?analista={analista}", headers={"Authorization": token})
-        return not filecmp.cmp("data/testmake.log.tests.csv", "data/testmake.log.csv")
+        return not filecmp.cmp("data/testmake.header.csv", "data/testmake.log.csv")

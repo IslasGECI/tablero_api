@@ -67,7 +67,7 @@ mutants: setup
 	mutmut run --paths-to-mutate api.py
 
 setup: install
-	cp data/testmake.log.tests.csv data/testmake.log.csv
+	cp data/testmake.header.csv data/testmake.log.csv
 
 start: install
 	python -m api
