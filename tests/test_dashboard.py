@@ -51,7 +51,7 @@ def test_get_badge():
 
 
 def test_dashboard_columns_from_test_datafile():
-    tablero = get_dashboard(log_name="data/testmake.test.csv")
+    tablero = get_dashboard(log_name="data/testmake.tests.csv")
     assert_dashboard_columns(tablero)
 
 
@@ -61,7 +61,7 @@ def test_dashboard_columns_from_empty_datafile():
 
 
 def test_dashboard_size_from_test_datafile():
-    tablero = get_dashboard(log_name="data/testmake.test.csv")
+    tablero = get_dashboard(log_name="data/testmake.tests.csv")
     tamano_esperado = (17, 4)
     tamano_obtenido = tablero.shape
     assert tamano_obtenido == tamano_esperado
