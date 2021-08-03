@@ -9,6 +9,7 @@ all: check coverage mutants
 	install \
 	linter \
 	mutants \
+	setup \
 	start \
 	tests
 
@@ -35,7 +36,7 @@ clean:
 	rm --force .mutmut-cache
 	rm --force coverage.xml
 
-coverage: install
+coverage: setup
 	pytest --cov=${module} --cov-report=xml --verbose && \
 	codecov --token=${codecov_token}
 
@@ -61,12 +62,15 @@ linter:
 	$(call lint, ${module})
 	$(call lint, tests)
 
-mutants: install
+mutants: setup
 	mutmut run --paths-to-mutate ${module}
 	mutmut run --paths-to-mutate api.py
+
+setup: install
+	cp data/testmake.header.csv data/testmake.log.csv
 
 start: install
 	python -m api
 
-tests: install
+tests:
 	pytest --cov=tablero --cov-report=term --verbose
