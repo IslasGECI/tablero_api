@@ -9,6 +9,7 @@ all: check coverage mutants
 	install \
 	linter \
 	mutants \
+	setup \
 	start \
 	tests
 
@@ -17,9 +18,11 @@ codecov_token = 8190b206-7a1c-4772-91c5-969521bdc433
 
 check:
 	black --check --line-length 100 ${module}
+	black --check --line-length 100 api.py
 	black --check --line-length 100 setup.py
 	black --check --line-length 100 tests
 	flake8 --max-line-length 100 ${module}
+	flake8 --max-line-length 100 api.py
 	flake8 --max-line-length 100 setup.py
 	flake8 --max-line-length 100 tests
 	mypy ${module}
@@ -33,12 +36,13 @@ clean:
 	rm --force .mutmut-cache
 	rm --force coverage.xml
 
-coverage: install
+coverage: setup
 	pytest --cov=${module} --cov-report=xml --verbose && \
 	codecov --token=${codecov_token}
 
 format:
 	black --line-length 100 ${module}
+	black --line-length 100 api.py
 	black --line-length 100 setup.py
 	black --line-length 100 tests
 
@@ -58,11 +62,15 @@ linter:
 	$(call lint, ${module})
 	$(call lint, tests)
 
-mutants: install
+mutants: setup
 	mutmut run --paths-to-mutate ${module}
+	mutmut run --paths-to-mutate api.py
+
+setup: install
+	cp data/testmake.header.csv data/testmake.log.csv
 
 start: install
 	python -m api
 
-tests: install
+tests:
 	pytest --cov=tablero --cov-report=term --verbose
