@@ -10,7 +10,7 @@ jobs:
     - name: Copia repositorio
       uses: actions/checkout@v2
     - name: Construye imagen
-      run: docker build --tag islasgeci/tablero_api:stable .
+      run: docker build --tag islasgeci/tablero_api:stable --tag islasgeci/tablero_api:${GITHUB_SHA:0:4} .
     - name: Verifica el formato
       run: docker run islasgeci/tablero_api:stable make check
     - name: Corre pruebas y evalúa cobertura
