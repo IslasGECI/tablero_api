@@ -28,7 +28,6 @@ def token_required(f):
 
 
 @app.route("/api/v1/dashboard")
-@token_required
 def get_dashboard():
     resp = Response(tablero.get_dashboard().to_json(orient="records"))
     resp.headers["Access-Control-Allow-Origin"] = "*"
