@@ -1,6 +1,7 @@
 FROM python:3
 WORKDIR /workdir
 COPY . .
+RUN apt update && apt full-upgrade --yes
 RUN pip install \
     black \
     codecov \
