@@ -1,3 +1,5 @@
+<img src="https://www.islas.org.mx/img/logo.svg" align="right" width="256" />
+
 # API para el Tablero de la Reproducibilidad
 
 API para el tablero que verifica la reproducibilidad de nuestros reportes mediante `geci-testmake`.
