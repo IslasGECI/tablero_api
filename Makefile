@@ -61,8 +61,12 @@ linter:
 	$(call lint, ${module})
 	$(call lint, tests)
 
-mutants: setup
+mutants: mutants_module mutants_api
+
+mutants_module: setup
 	mutmut run --paths-to-mutate ${module}
+
+mutants_api: setup
 	mutmut run --paths-to-mutate api.py
 
 setup: clean install
@@ -72,4 +76,5 @@ start: install
 	python -m api
 
 tests:
+	cp data/testmake.header.csv data/testmake.log.csv
 	pytest --cov=tablero --cov-report=term --verbose

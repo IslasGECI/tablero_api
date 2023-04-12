@@ -20,7 +20,7 @@ jobs:
     - name: Upload coverage reports to Codecov with GitHub Action
       uses: codecov/codecov-action@v3
     - name: Evalúa resistencia a mutaciones
-      run: docker run islasgeci/tablero_api:latest make mutants
+      run: docker run islasgeci/tablero_api:latest make mutants_module
     - name: Docker log-in
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
