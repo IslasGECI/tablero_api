@@ -27,8 +27,9 @@ def is_main(registro):
 
 
 def append_row_to_dashboard(registros_agrupados, repo, objetivo, tablero):
-    renglon_concatenar = get_row_to_append(registros_agrupados, repo, objetivo)
-    tablero = tablero.append(renglon_concatenar, ignore_index=True)
+    renglon_concatenar_dict = get_row_to_append(registros_agrupados, repo, objetivo)
+    renglon_concatenar = pd.DataFrame([renglon_concatenar_dict])
+    tablero = pd.concat([tablero, renglon_concatenar], ignore_index=True)
     return tablero
 
 

@@ -26,13 +26,14 @@ def import_data(log_name):
 
 def add_last_record_of_revision(tabla, repo, objetivo, revision, registro_ramas):
     ultimo_registro = get_last_record(tabla)
-    renglon_concatenar = {
+    renglon_concatenar_dict = {
         "repo": repo,
         "objetivo": objetivo,
         "revision": revision,
         "exitoso": ultimo_registro.exito,
     }
-    registro_ramas = registro_ramas.append(renglon_concatenar, ignore_index=True)
+    renglon_concatenar = pd.DataFrame([renglon_concatenar_dict])
+    registro_ramas = pd.concat([registro_ramas, renglon_concatenar], ignore_index=True)
     return registro_ramas
 
 
