@@ -2,9 +2,8 @@ FROM python:3
 WORKDIR /workdir
 COPY . .
 RUN apt update && apt full-upgrade --yes
-RUN pip install \
+RUN pip install --upgrade pip && pip install \
     black \
-    codecov \
     data-science-types \
     flake8 \
     flask_testing \
