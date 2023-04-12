@@ -6,6 +6,7 @@ all: check coverage mutants
 	clean \
 	coverage \
 	format \
+	init \
 	install \
 	linter \
 	mutants \
@@ -46,6 +47,8 @@ format:
 	black --line-length 100 setup.py
 	black --line-length 100 tests
 
+init: setup tests
+
 install:
 	pip install --editable .
 
@@ -66,7 +69,7 @@ mutants: setup
 	mutmut run --paths-to-mutate ${module}
 	mutmut run --paths-to-mutate api.py
 
-setup: install
+setup: clean install
 	cp data/testmake.header.csv data/testmake.log.csv
 
 start: install
