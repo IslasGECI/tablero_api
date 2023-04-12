@@ -36,8 +36,7 @@ clean:
 	rm --force coverage.xml
 
 coverage: setup
-	pytest --cov=${module} --cov-report=xml --verbose && \
-	codecov --token=${codecov_token}
+	pytest --cov=${module} --cov-report=xml --verbose
 
 format:
 	black --line-length 100 ${module}
