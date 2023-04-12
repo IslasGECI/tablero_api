@@ -1,6 +1,7 @@
 from ..api import app
 from flask_testing import TestCase
 import filecmp
+import os
 
 
 class TestApp(TestCase):
@@ -30,4 +31,9 @@ class TestApp(TestCase):
 
     def _was_added_a_new_row(self, analista, token):
         self.client.post(f"/api/v1/records?analista={analista}", headers={"Authorization": token})
-        return not filecmp.cmp("data/testmake.header.csv", "data/testmake.log.csv")
+        header_path = "data/testmake.header.csv"
+        log_path = "data/testmake.log.csv"
+        is_new_row = not filecmp.cmp(header_path, log_path)
+        command = f"cp {header_path} {log_path}"
+        os.system(command)
+        return is_new_row
